@@ -7,4 +7,4 @@ if __name__ == '__main__':
         for job in jobs:
             print(job)
     except Exception as ex:
-        print(f'{ex.__class__.__name__}: {ex.__str__}')
+        print(f'{ex.__class__.__name__}: {ex.__str__()}')
