@@ -18,9 +18,8 @@ for job in jobs:
     results.append(f'''
     Company Name: {company_name}
     Required Skills: {skills}
-    Published Date: Posted{published_date}
+    Published Date: {published_date}
     ''')
 
 for job_post in results:
     print(job_post)
-    
