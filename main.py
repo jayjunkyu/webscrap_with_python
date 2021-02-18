@@ -5,6 +5,7 @@ import requests
 html_text = requests.get('https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=python&txtLocation=').text
 soup = BeautifulSoup(html_text, features='lxml')
 jobs = soup.find_all('li', class_='clearfix job-bx wht-shd-bx')
+results = []
 
 for job in jobs:
     company_name = job.find('h3', class_='joblist-comp-name').text.strip()
@@ -14,8 +15,12 @@ for job in jobs:
     if 'days' not in published_date:
         break
 
-    print(f'''
+    results.append(f'''
     Company Name: {company_name}
     Required Skills: {skills}
     Published Date: Posted{published_date}
     ''')
+
+for job_post in results:
+    print(job_post)
+    
