@@ -1,34 +1,10 @@
-from bs4 import BeautifulSoup
-import requests
+from src.commonlib.web_scraper import find_jobs
 
-
-print('Put some skill that you are not familiar with')
-unfamiliar_skill = input('>')
-print(f'Filtering out {unfamiliar_skill}')
-
-html_text = requests.get(f'https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=python&txtLocation=').text
-soup = BeautifulSoup(html_text, features='lxml')
-jobs = soup.find_all('li', class_='clearfix job-bx wht-shd-bx')
-results = []
-
-for job in jobs:
-    company_name = job.find('h3', class_='joblist-comp-name').text.strip()
-    skills = job.find('span', class_='srp-skills').text.strip()
-    published_date = job.find('span', class_='sim-posted').text.strip().split('Posted')[-1]
-    more_info = job.header.h2.a['href']
-
-    if 'days' not in published_date:
-        break
-
-    if unfamiliar_skill in skills:
-        break
-
-    results.append(f'''
-    Company Name: {company_name}
-    Required Skills: {skills}
-    Published Date: {published_date}
-    More info: {more_info}
-    ''')
-
-for job_post in results:
-    print(job_post)
+if __name__ == '__main__':
+    try:
+        end_page = int(input('Enter number of pages to scrap: ').strip())
+        jobs = find_jobs(end_page=end_page)
+        for job in jobs:
+            print(job)
+    except Exception as ex:
+        print(f'{ex.__class__.__name__}: {ex.__str__}')
