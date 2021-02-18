@@ -10,6 +10,9 @@ for job in soup.find_all('li', class_='clearfix job-bx wht-shd-bx'):
     skills = job.find('span', class_='srp-skills').text.strip()
     published_date = job.find('span', class_='sim-posted').text.strip().split('Posted')[-1]
 
+    if 'days' not in published_date:
+        break
+
     print(f'''
     Company Name: {company_name}
     Required Skills: {skills}
