@@ -16,6 +16,7 @@ if __name__ == '__main__':
             time.sleep(time_wait)
             # TODO: export jobs into a csv file
             # TODO: add relevant unit tests
+            # TODO: factor out optional flags out of main.py
         except Exception as ex:
             print(f'{ex.__class__.__name__}: {ex.__str__()}')
             break
