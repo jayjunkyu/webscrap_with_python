@@ -5,10 +5,7 @@ from src.commonlib.constants import TIMESJOB_URL
 from src.commonlib.utils import is_more_than_month_old
 
 
-def find_jobs(start_page=1, end_page=1):
-    print('Put some skill that you are not familiar with')
-    unfamiliar_skill = input('>').strip().lower()
-    print(f'Filtering out {unfamiliar_skill}')
+def find_jobs(start_page=1, end_page=1, unfamiliar_skill=None):
     results = []
 
     for page in range(start_page, end_page + 1):
