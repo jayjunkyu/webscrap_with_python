@@ -2,7 +2,11 @@ from bs4 import BeautifulSoup
 import requests
 
 
-html_text = requests.get('https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=python&txtLocation=').text
+print('Put some skill that you are not familiar with')
+unfamiliar_skill = input('>')
+print(f'Filtering out {unfamiliar_skill}')
+
+html_text = requests.get(f'https://www.timesjobs.com/candidate/job-search.html?searchType=personalizedSearch&from=submit&txtKeywords=python&txtLocation=').text
 soup = BeautifulSoup(html_text, features='lxml')
 jobs = soup.find_all('li', class_='clearfix job-bx wht-shd-bx')
 results = []
@@ -14,6 +18,9 @@ for job in jobs:
     more_info = job.header.h2.a['href']
 
     if 'days' not in published_date:
+        break
+
+    if unfamiliar_skill in skills:
         break
 
     results.append(f'''
