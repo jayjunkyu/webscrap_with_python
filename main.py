@@ -11,6 +11,7 @@ for job in jobs:
     company_name = job.find('h3', class_='joblist-comp-name').text.strip()
     skills = job.find('span', class_='srp-skills').text.strip()
     published_date = job.find('span', class_='sim-posted').text.strip().split('Posted')[-1]
+    more_info = job.header.h2.a['href']
 
     if 'days' not in published_date:
         break
@@ -19,6 +20,7 @@ for job in jobs:
     Company Name: {company_name}
     Required Skills: {skills}
     Published Date: {published_date}
+    More info: {more_info}
     ''')
 
 for job_post in results:
